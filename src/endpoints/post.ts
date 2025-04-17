@@ -130,19 +130,40 @@ export class Post extends OpenAPIRoute {
           "schema": {
             "type": "object",
             "properties": {
-              "food": {
-                "type": "string",
-                "enum": ["Hotdog", "Not Hotdog"],
-                "description": "The name of the food item. Can be either 'Hotdog' or 'Not Hotdog'."
+              "isFood": {
+                "type": "boolean",
+                "description": "Whether the image is food or not."
               },
-              "description": {
-                "type": "string",
-                "description": "A description of the food item."
-              }
+              "foodItems": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "food": {
+                      "type": "string",
+                      "description": "Food item name."
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Description of the food item."
+                    },
+                    "confidence": {
+                      "type": "number",
+                      "description": "Confidence level of the identification."
+                    }
+                  },
+                  "required": [
+                    "food",
+                    "description",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+              },
             },
             "required": [
-              "food",
-              "description"
+              "isFood",
+              "foodItems"
             ],
             "additionalProperties": false
           }
