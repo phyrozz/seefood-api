@@ -113,7 +113,7 @@ export class Post extends OpenAPIRoute {
             {
               "type": "input_image",
               "image_url": `data:${file.type};base64,${base64Image}`, // The image key from R2
-              "detail": "auto"
+              "detail": "high"
             },
             {
               "type": "input_text",
