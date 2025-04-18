@@ -103,7 +103,7 @@ export class Post extends OpenAPIRoute {
           "content": [
             {
               "type": "input_text",
-              "text": "you are a food identifier bot. you must accurately identify the food on the image sent by the user."
+              "text": "you are a food identifier bot. you must accurately identify the food on the image sent by the user. You must also identify filipino dishes accurately."
             }
           ]
         },
@@ -150,12 +150,39 @@ export class Post extends OpenAPIRoute {
                     "confidence": {
                       "type": "number",
                       "description": "Confidence level of the identification."
+                    },
+                    "otherPossibleMatches": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "food": {
+                            "type": "string",
+                            "description": "Possible food item name that might match the current food item."
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "Description of the possible food item."
+                          },
+                          "confidence": {
+                            "type": "number",
+                            "description": "Confidence level of the identification."
+                          }
+                        },
+                        "required": [
+                          "food",
+                          "description",
+                          "confidence"
+                        ],
+                        "additionalProperties": false
+                      }
                     }
                   },
                   "required": [
                     "food",
                     "description",
-                    "confidence"
+                    "confidence",
+                    "otherPossibleMatches"
                   ],
                   "additionalProperties": false
                 },
@@ -181,7 +208,10 @@ export class Post extends OpenAPIRoute {
       success: true,
       result: {
         key,
-        body: JSON.parse(response.output_text)
+        body: JSON.parse(response.output_text),
+        inputToken: response.usage.input_tokens,
+        outputToken: response.usage.output_tokens,
+        totalToken: response.usage.total_tokens,
       }
     });
   }
