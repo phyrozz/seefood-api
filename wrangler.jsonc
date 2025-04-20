@@ -6,16 +6,19 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "seefood-api",
 	"main": "src/index.ts",
-	"compatibility_date": "2025-04-17",
+	"compatibility_date": "2024-09-23",
 	"observability": {
 		"enabled": true
 	},
-	"r2_buckets": [
-		{
-			"binding": "UPLOADS_BUCKET",
-			"bucket_name": "seefood-uploads"
-		}
-	]
+	"compatibility_flags": [
+    "nodejs_compat"
+  ],
+	// "r2_buckets": [
+	// 	{
+	// 		"binding": "UPLOADS_BUCKET",
+	// 		"bucket_name": "seefood-uploads"
+	// 	}
+	// ]
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement

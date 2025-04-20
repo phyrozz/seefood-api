@@ -3,13 +3,16 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"deploy": "wrangler deploy",
+		"deploy": "wrangler deploy --minify src/index.ts",
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
 		"cf-typegen": "wrangler types"
 	},
 	"dependencies": {
+		"@aws-sdk/client-s3": "^3.787.0",
+		"@aws-sdk/s3-request-presigner": "^3.787.0",
 		"chanfana": "^2.0.2",
+		"elysia": "^1.2.25",
 		"hono": "^4.4.7",
 		"nanoid": "^5.1.5",
 		"openai": "^4.95.0",
@@ -17,8 +20,9 @@
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20250417.0",
+		"@types/bun": "^1.2.10",
 		"@types/node": "20.8.3",
 		"@types/service-worker-mock": "^2.0.1",
-		"wrangler": "^4.11.1"
+		"wrangler": "^4.12.0"
 	}
 }
