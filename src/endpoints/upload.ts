@@ -20,17 +20,27 @@ export const upload = new Elysia()
   
     const s3Client = new S3Client({
       region: 'auto',
-      endpoint: 'https://9df9fc38b820f31738a67e2abf240d01.r2.cloudflarestorage.com/seefood-uploads',
+      endpoint: process.env.BUCKET_URL,
       credentials: {
-        accessKeyId: '',
-        secretAccessKey: '',
+        accessKeyId: process.env.R2_ACCESS_KEY_ID,
+        secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
       },
     });
 
+    
+
     const command = new PutObjectCommand({
-      Bucket: 'seefood-uploads',
+      Bucket: process.env.BUCKET_NAME,
       Key: key,
     });
 
     const url = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
+
+    return {
+      success: true,
+      result: {
+        url,
+        key,
+      },
+    };
   });
